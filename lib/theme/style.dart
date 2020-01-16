@@ -16,6 +16,15 @@ ThemeData appTheme() {
   return ThemeData(
     appBarTheme: AppBarTheme(
       color: BFEColors.NAVY
+    ),
+    textTheme: TextTheme(
+      body1: TextStyle(color: Colors.white)
+    ),
+    primaryColor: Colors.white,
+    canvasColor: BFEColors.NAVY,
+    buttonTheme: ButtonThemeData(
+      buttonColor: BFEColors.NAVY,
+      textTheme: ButtonTextTheme.primary
     )
   );
 }
