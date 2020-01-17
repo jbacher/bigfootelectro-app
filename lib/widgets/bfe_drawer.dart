@@ -1,30 +1,35 @@
 import 'package:bigfoot_electro/widgets/drawer_option.dart';
 import 'package:flutter/material.dart';
 
-Widget bfeDrawer () {
-  return Drawer(
+class BFEDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
         //THIS WILL BE CONVERTED TO A SEPARATE WIDGET
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              //This will be moved to its own widget potentially AND MAKE IT CLICKABLE
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            child: GestureDetector(
+              onTap: () {
+                //TODO POP!
+                Navigator.of(context).pushNamed('/');
+              },
               child: Image.asset('assets/images/gorilla_face_outline.png'),
-            ),
-            DrawerOption('/lineup'),
-            DrawerOption('/myschedule'),
-            DrawerOption("/info"),
-            DrawerOption('/announcements'),
-            // drawerOption(context, "SOCIAL")
-            DrawerOption('/map'),
-            // drawerOption(context, "POINTS OF INTEREST"),
-          ],
-        ),
-      );
+            )
+          ),
+          DrawerOption('/lineup', 'LINEUP & SCHEDULE'),
+          SizedBox(height: 15),
+          DrawerOption('/myschedule', 'MY SCHEDULE'),
+          SizedBox(height: 15),
+          DrawerOption("/info", 'INFO & FAQ'),
+          SizedBox(height: 15),
+          DrawerOption('/announcements', 'ANNOUNCEMENTS'),
+          SizedBox(height: 15),
+          // drawerOption(context, "SOCIAL")
+          DrawerOption('/map', 'MAP'),
+          // drawerOption(context, "POINTS OF INTEREST"),
+        ],
+      ),
+    );
+  }
 }
-
-  // "/": (BuildContext context) => mainScaffold(context, "home", homeScreen(context)), //probably also ticket page for now, tickets link: https://www.mt.cm/bigfoot-electro-2020
-  // "/lineup": (BuildContext context) => mainScaffold(context, "lineup", lineupScreen(context)),
-  // "/myschedule": (BuildContext context) => mainScaffold(context, "my schedule", myScheduleScreen(context)),
-  // "/info": (BuildContext context) => mainScaffold(context, "info & faq", infoScreen(context)), //maybe call this info? 
-  // "/map": (BuildContext context) => mainScaffold(context, "home", mapScreen(context)),
-  // "/announcements": (BuildContext context) => mainScaffold(context, "announcements", notificationScreen(context))

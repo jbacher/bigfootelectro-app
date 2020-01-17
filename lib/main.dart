@@ -19,25 +19,13 @@ class App extends StatelessWidget {
       theme: appTheme(),
       initialRoute: '/',
       routes: {
-        "/": (context) => MainScaffold("home", homeScreen()), //probably also ticket page for now, tickets link: https://www.mt.cm/bigfoot-electro-2020
-        "/lineup": (context) => MainScaffold("lineup", lineupScreen()),
-        "/myschedule": (context) => MainScaffold("my schedule", myScheduleScreen()),
-        "/info": (context) => MainScaffold("info & faq", infoScreen()), //maybe call this info? 
-        "/map": (context) => MainScaffold("home", mapScreen()),
-        "/announcements": (context) => MainScaffold("announcements", notificationScreen())
+        "/": (context) => MainScaffold("2020 TICKETS", HomeScreen()), //probably also ticket page for now, tickets link: https://www.mt.cm/bigfoot-electro-2020
+        "/lineup": (context) => MainScaffold("LINEUP", LineupScreen()),
+        "/myschedule": (context) => MainScaffold("MY SCHEDULE", myScheduleScreen()),
+        "/info": (context) => MainScaffold("INFO & FAQ", infoScreen()), //maybe call this info? 
+        "/map": (context) => MainScaffold("HOME", mapScreen()),
+        "/announcements": (context) => MainScaffold("ANNOUNCEMENTS", notificationScreen())
       },
     );
-  }
-}
-
-class MyHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: RaisedButton(
-          child: Text("Foo"),
-          onPressed: () => Navigator.pushNamed(context, "/"),
-        ),
-      );
   }
 }

@@ -16,7 +16,7 @@ class MainScaffold extends StatelessWidget {
         title: Text(title),
         centerTitle: true,
       ),
-      drawer: bfeDrawer(),
+      drawer: BFEDrawer(),
       body: body
     ); 
   } 

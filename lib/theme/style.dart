@@ -15,11 +15,19 @@ class BFEColors {
 ThemeData appTheme() {
   return ThemeData(
     appBarTheme: AppBarTheme(
-      color: BFEColors.NAVY
+      color: BFEColors.NAVY,
+      textTheme: TextTheme(
+        body1: TextStyle(color: Colors.white)
+      )
     ),
-    textTheme: TextTheme(
-      body1: TextStyle(color: Colors.white)
+    primaryTextTheme: TextTheme(
+      title: TextStyle(
+        color: Colors.white
+      )
     ),
+    // textTheme: TextTheme(
+    //   body1: TextStyle(color: Colors.white)
+    // ),
     primaryColor: Colors.white,
     canvasColor: BFEColors.NAVY,
     buttonTheme: ButtonThemeData(

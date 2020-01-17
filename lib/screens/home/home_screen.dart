@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-Widget homeScreen() {
-  return Container(
-    child: Center(
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -18,5 +20,7 @@ Widget homeScreen() {
           ],
         ),
       ),
-  );
+    );
+  }
+
 }
