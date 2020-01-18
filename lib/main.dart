@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         "/": (context) => MainScaffold("2020 TICKETS", HomeScreen()), //probably also ticket page for now, tickets link: https://www.mt.cm/bigfoot-electro-2020
-        "/lineup": (context) => MainScaffold("LINEUP", LineupScreen()),
+        "/lineup": (context) => LineupScreen(),
         "/myschedule": (context) => MainScaffold("MY SCHEDULE", myScheduleScreen()),
         "/info": (context) => MainScaffold("INFO & FAQ", infoScreen()), //maybe call this info? 
         "/map": (context) => MainScaffold("HOME", mapScreen()),
