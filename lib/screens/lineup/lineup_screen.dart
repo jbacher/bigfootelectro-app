@@ -3,6 +3,7 @@ import 'package:bigfoot_electro/widgets/bfe_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:bigfoot_electro/models/artist.dart';
 
 Widget placeholderWidget(Color color) {
    return Container(
@@ -10,18 +11,12 @@ Widget placeholderWidget(Color color) {
    );
 }
 
-class Artist {
-  final String name;
-  const Artist({this.name});
-  //will have time at some point, and an image perhaps?
-}
-
 class _ArtistListItem extends ListTile {
   _ArtistListItem(Artist artist)
     : super(
-      title: new Text(artist.name),
-      subtitle: new Text(artist.name),
-      leading: new CircleAvatar(child: new Text(artist.name[0])));
+      title: new Text(artist.name.toUpperCase()),
+      leading: CircleAvatar(child: Image.asset('assets/images/gorilla_face_graphic.png')));
+      // leading: new CircleAvatar(child: new Text(artist.name[0])));
 }
 
 class LineupScreen extends StatefulWidget {
@@ -32,6 +27,17 @@ class LineupScreen extends StatefulWidget {
 }
 
   List artistsList = <Artist> [
+    Artist(name: "test"),
+    Artist(name: "Vas Majority"),
+    Artist(name: "Jake Bacher"),
+    Artist(name: "Vas Majority"),
+    Artist(name: "Jake Bacher"),
+    Artist(name: "Vas Majority"),
+    Artist(name: "Jake Bacher"),
+    Artist(name: "Vas Majority"),
+    Artist(name: "Jake Bacher"),
+    Artist(name: "Vas Majority"),
+    Artist(name: "Jake Bacher"),
     Artist(name: "Vas Majority"),
     Artist(name: "Jake Bacher")
   ];
