@@ -13,6 +13,10 @@ class ArtistFocusScreen extends StatefulWidget {
 }
 
 class _ArtistFocusState extends State<ArtistFocusScreen> {
-  Artist _artist = this.widget.artist
+  // Artist _artist = widget.artist;
+
   @override
+  Widget build(BuildContext context) {
+    return Text(widget.artist.name);
+  }
 }

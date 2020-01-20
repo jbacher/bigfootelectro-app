@@ -8,7 +8,8 @@ class BFEColors {
   static const MAROON = Color(0xffb52d2d);
   static const PURPLE = Color(0xffb62d65);
   static const VIOLET = Color(0xffb52d99);
-  static const NAVY = Color(0xff0A203A); 
+  static const NAVY = Color(0xff0A203A);
+  static const DARK_NAVY = Color(0xff06172B); 
 }
 
 

@@ -14,6 +14,8 @@ Widget placeholderWidget(Color color) {
 class _ArtistListItem extends ListTile {
   _ArtistListItem(Artist artist)
     : super(
+      //Push specific artist screen
+      // onTap: () => Navigator.of(context).push(main),
       title: new Text(artist.name.toUpperCase()),
       leading: CircleAvatar(child: Image.asset('assets/images/gorilla_face_graphic.png')));
       // leading: new CircleAvatar(child: new Text(artist.name[0])));
@@ -102,22 +104,6 @@ class _LineupState extends State<LineupScreen> {
       ),
       drawer: BFEDrawer(),
       body: _children[_currentIndex],
-      // body: Container(
-      //   child: Center(
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.center,
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: <Widget>[
-      //         Container(
-      //           height: 600,
-      //           child: PhotoView(
-      //             imageProvider: const AssetImage('assets/images/phase_one.jpeg'),                
-      //           ), 
-      //         )
-      //       ],
-      //     )
-      //   ),
-      // ),
     ); 
   }
 }
