@@ -27,6 +27,10 @@ class BFEDrawer extends StatelessWidget {
           SizedBox(height: 15),
           // drawerOption(context, "SOCIAL")
           DrawerOption('/map', 'MAP'),
+          // SizedBox(height: 15),
+          // DrawerOption('/contact', 'CONTACT US'),
+          // TODO potentially put image and lower the heigh so it does not scroll
+          // Image.asset('assets/images/gorilla_dab.png')
           // drawerOption(context, "POINTS OF INTEREST"),
         ],
       ),

@@ -57,7 +57,7 @@ class _LineupState extends State<LineupScreen> {
         return StickyHeader(
           header: Container(
             height: 20,
-            color: Colors.grey,
+            color: Colors.grey, //pick a lighter gray to match bottom bar
             padding: EdgeInsets.symmetric(horizontal: 16),
             alignment: Alignment.centerLeft,
             child: Text("header",
@@ -89,6 +89,7 @@ class _LineupState extends State<LineupScreen> {
         centerTitle: true,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey, //pick a lighter gray
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: [

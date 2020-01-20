@@ -16,18 +16,26 @@ class InfoScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                padding: EdgeInsets.all(20),
                 color: BFEColors.MAROON,
                 child: Text(faqs[index].question,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20
+                    // fontFamily: 'Oswald',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 30
                   ),
                 ),
               ),
               Container(
+                padding: EdgeInsets.all(30),
                 child: Text(faqs[index].answer,
                   style: TextStyle(
-                    color: Colors.white
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                    fontSize: 20
                   ),
                 ),
               )

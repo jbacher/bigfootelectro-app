@@ -17,6 +17,9 @@ ThemeData appTheme() {
   return ThemeData(
     appBarTheme: AppBarTheme(
       color: BFEColors.NAVY,
+      iconTheme: IconThemeData(
+        color: Colors.white
+      ),
       textTheme: TextTheme(
         body1: TextStyle(color: Colors.white)
       )
