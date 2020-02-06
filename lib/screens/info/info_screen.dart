@@ -3,12 +3,71 @@ import 'package:flutter/material.dart';
 import 'package:bigfoot_electro/models/info.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-class InfoScreen extends StatelessWidget {
+class InfoScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _InfoState();
+  }
+}
+
+class _InfoState extends State<InfoScreen> {
+  TextEditingController editingController = TextEditingController();
+
+  List _currentFaqs = List();
+
+  @override
+  void initState() {
+    _currentFaqs.addAll(faqs);
+    super.initState();
+  }
+  
+  void filterResults(String query) {
+    List<QuestionAnswer> currentResults = List<QuestionAnswer>();
+
+    if (query.isNotEmpty) {
+      faqs.forEach( (item) {
+        if (item.question.contains(query) || item.answer.contains(query)) {
+          currentResults.add(item);
+        }
+      });
+      setState(() {
+        _currentFaqs.clear();
+        _currentFaqs.addAll(currentResults);
+      });
+    } else {
+      setState(() {
+        _currentFaqs.clear();
+        _currentFaqs.addAll(faqs);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: faqs.length,
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextField(
+            onChanged: (value) {
+              filterResults(value);
+            },
+            style: TextStyle(
+              color: Colors.white
+            ),
+            decoration: InputDecoration(
+              labelText: "Search",
+              hintText: "Search",
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25.0))
+              )
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+      itemCount: _currentFaqs.length,
       itemBuilder: (context, index){
         return Container(
           color: index % 2 == 0 ? BFEColors.DARK_NAVY : BFEColors.NAVY,
@@ -19,7 +78,7 @@ class InfoScreen extends StatelessWidget {
                 margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                 padding: EdgeInsets.all(20),
                 color: BFEColors.MAROON,
-                child: Text(faqs[index].question,
+                child: Text(_currentFaqs[index].question,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -31,7 +90,7 @@ class InfoScreen extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.all(30),
-                child: Text(faqs[index].answer,
+                child: Text(_currentFaqs[index].answer,
                   style: TextStyle(
                     color: Colors.white,
                     letterSpacing: 1.5,
@@ -52,7 +111,11 @@ class InfoScreen extends StatelessWidget {
           // ),
         );
       },
+    ),
+        )
+      ],
     );
   }
+
 }
 

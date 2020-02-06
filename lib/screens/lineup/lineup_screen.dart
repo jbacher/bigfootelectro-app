@@ -49,9 +49,12 @@ class _LineupState extends State<LineupScreen> {
   String _title = "Schedule";
   List artists = artistsList;
 
-  final List<Widget> _children = [
+  
+
+  List<Widget> _screens = [
     placeholderWidget(Colors.green),
-    ListView.builder(
+    Scrollbar(
+      child: ListView.builder(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       itemBuilder: (context, index){
         return StickyHeader(
@@ -71,6 +74,7 @@ class _LineupState extends State<LineupScreen> {
         );
       },
       itemCount: artistsList.length,
+      ),
     )
   ];
 
@@ -104,7 +108,30 @@ class _LineupState extends State<LineupScreen> {
         ],
       ),
       drawer: BFEDrawer(),
-      body: _children[_currentIndex],
+      body:  Column(
+          children: <Widget>[
+            //TODO: search bar might not be needed as the plan is to have alphabetical scrolling!
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (value) {
+
+                },
+                decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Search",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25.0))
+                  )
+                ),
+              ),
+            ),
+            Expanded(
+              child: _screens[_currentIndex],
+            )
+          ],
+        ) 
     ); 
   }
 }
