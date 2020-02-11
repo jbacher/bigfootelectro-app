@@ -1,5 +1,6 @@
 import 'package:bigfoot_electro/theme/style.dart';
 import 'package:bigfoot_electro/widgets/bfe_drawer.dart';
+import 'package:bigfoot_electro/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -102,7 +103,7 @@ class _LineupState extends State<LineupScreen> {
             title: Text('Schedule')
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.list),
             title: Text('Lineup')
           )
         ],
@@ -111,22 +112,7 @@ class _LineupState extends State<LineupScreen> {
       body:  Column(
           children: <Widget>[
             //TODO: search bar might not be needed as the plan is to have alphabetical scrolling!
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                onChanged: (value) {
-
-                },
-                decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Search",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25.0))
-                  )
-                ),
-              ),
-            ),
+            searchBar(null),
             Expanded(
               child: _screens[_currentIndex],
             )

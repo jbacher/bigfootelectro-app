@@ -1,4 +1,5 @@
 import 'package:bigfoot_electro/theme/style.dart';
+import 'package:bigfoot_electro/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigfoot_electro/models/info.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -44,75 +45,63 @@ class _InfoState extends State<InfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextField(
-            onChanged: (value) {
-              filterResults(value);
-            },
-            style: TextStyle(
-              color: Colors.white
-            ),
-            decoration: InputDecoration(
-              labelText: "Search",
-              hintText: "Search",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(25.0))
-              )
-            ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white
           ),
+          child: searchBar(filterResults)
         ),
-        Expanded(
-          child: ListView.builder(
-      itemCount: _currentFaqs.length,
-      itemBuilder: (context, index){
-        return Container(
-          color: index % 2 == 0 ? BFEColors.DARK_NAVY : BFEColors.NAVY,
-          child: Column (
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                padding: EdgeInsets.all(20),
-                color: BFEColors.MAROON,
-                child: Text(_currentFaqs[index].question,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    // fontFamily: 'Oswald',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 30
-                  ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            itemCount: _currentFaqs.length,
+            itemBuilder: (context, index){
+              return Container(
+                color: index % 2 == 0 ? BFEColors.DARK_NAVY : BFEColors.NAVY,
+                child: Column (
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                      padding: EdgeInsets.all(20),
+                      color: BFEColors.MAROON,
+                      child: Text(_currentFaqs[index].question,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          // fontFamily: 'Oswald',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 30
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(30),
+                      child: Text(_currentFaqs[index].answer,
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.5,
+                          fontSize: 20
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(30),
-                child: Text(_currentFaqs[index].answer,
-                  style: TextStyle(
-                    color: Colors.white,
-                    letterSpacing: 1.5,
-                    fontSize: 20
-                  ),
-                ),
-              )
-            ],
+                // children:  StickyHeader(
+                //   header: Container(
+                //     child: Text(faqs[index].question),
+                //   ),
+                //   content: Container(
+                //     color: BFEColors.DARK_NAVY,
+                //     child: Text(faqs[index].answer),
+                //   ),
+                // ),
+              );
+            },
           ),
-          // children:  StickyHeader(
-          //   header: Container(
-          //     child: Text(faqs[index].question),
-          //   ),
-          //   content: Container(
-          //     color: BFEColors.DARK_NAVY,
-          //     child: Text(faqs[index].answer),
-          //   ),
-          // ),
-        );
-      },
-    ),
-        )
+
       ],
     );
   }
