@@ -24,7 +24,7 @@ class App extends StatelessWidget {
         "/myschedule": (context) => MainScaffold("MY SCHEDULE", myScheduleScreen()),
         "/info": (context) => MainScaffold("INFO & FAQ", InfoScreen()), //maybe call this info? 
         "/map": (context) => MainScaffold("MAP", mapScreen()),
-        "/announcements": (context) => MainScaffold("ANNOUNCEMENTS", NotificationScreen()),
+        "/announcements": (context) => MainScaffold("ANNOUNCEMENTS", AnnouncementScreen()),
       },
     );
   }

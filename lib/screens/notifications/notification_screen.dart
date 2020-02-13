@@ -1,16 +1,17 @@
+import 'package:bigfoot_electro/screens/notifications/notification_focus.dart';
 import 'package:flutter/material.dart';
 import 'package:bigfoot_electro/models/notification.dart'; //will be replaced with loaded data from phone
 
 //Tapping on a notification will push a screen not navigate to named route
 
-class NotificationScreen extends StatefulWidget {
+class AnnouncementScreen extends StatefulWidget {
   @override 
   State<StatefulWidget> createState() {
-    return _NotificationState(); 
+    return _AnnouncementState(); 
   }
 }
 
-class _NotificationState extends State<NotificationScreen> {
+class _AnnouncementState extends State<AnnouncementScreen> {
   
   int _currentlySelected = -1;
 
@@ -32,7 +33,10 @@ class _NotificationState extends State<NotificationScreen> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-
+             Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => notificationFocus(notifications[index]))
+             );
             },
             onTapDown: (details) { //change the color to gray
               updateSelected(index);
