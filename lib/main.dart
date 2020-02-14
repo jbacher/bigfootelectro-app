@@ -1,7 +1,8 @@
 import 'package:bigfoot_electro/screens/home/home_screen.dart';
 import 'package:bigfoot_electro/screens/info/info_screen.dart';
 import 'package:bigfoot_electro/screens/lineup/lineup_screen.dart';
-import 'package:bigfoot_electro/screens/maps/map_screen.dart';
+import 'package:bigfoot_electro/screens/maps/camping_map_screen.dart';
+import 'package:bigfoot_electro/screens/maps/grounds_map_screen.dart';
 import 'package:bigfoot_electro/screens/notifications/notification_screen.dart';
 import 'package:bigfoot_electro/screens/schedule/my_schedule_screen.dart';
 import 'package:bigfoot_electro/theme/style.dart';
@@ -23,7 +24,8 @@ class App extends StatelessWidget {
         "/lineup": (context) => LineupScreen(),
         "/myschedule": (context) => MainScaffold("MY SCHEDULE", myScheduleScreen()),
         "/info": (context) => MainScaffold("INFO & FAQ", InfoScreen()), //maybe call this info? 
-        "/map": (context) => MainScaffold("MAP", mapScreen()),
+        "/groundsmap": (context) => MainScaffold("GROUNDS MAP", groundsMapScreen()),
+        "/campingmap": (context) => MainScaffold("CAMPING MAP", campingMapScreen()),
         "/announcements": (context) => MainScaffold("ANNOUNCEMENTS", AnnouncementScreen()),
       },
     );

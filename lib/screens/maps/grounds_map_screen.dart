@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget mapScreen() {
+Widget groundsMapScreen() {
   return Container(
     decoration: BoxDecoration(color: Colors.white),
     child: Center(

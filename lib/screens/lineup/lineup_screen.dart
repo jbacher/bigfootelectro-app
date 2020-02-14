@@ -16,12 +16,40 @@ Widget placeholderWidget(Color color) {
 }
 
 class _ArtistListItem extends ListTile {
-  _ArtistListItem(Artist artist)
+  _ArtistListItem(Artist artist, bool showLocation)
     : super(
       //Push specific artist screen
       // onTap: () => Navigator.of(context).push(main),
-      title: Text(artist.name.toUpperCase()), //TODO on schedule screen put location under artist name
-      leading: CircleAvatar(child: Image.asset('assets/images/gorilla_face_graphic.png')));
+      title: Column(children: <Widget>[
+          Container(
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            child: Text(artist.name.toUpperCase()),
+            alignment: Alignment.centerLeft,
+          ),
+          showLocation ?         
+            Row(
+            children: <Widget>[
+              Icon(Icons.location_on,
+                color: Colors.grey,
+              ),
+              Text("Main Stage",
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey
+                ),
+              )
+            ],
+          )
+          : Row()
+        ],
+      ),  //TODO on schedule screen put location under artist name
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.asset('assets/images/gorilla_face_graphic.png',
+        width: 45,
+        height: 45,
+        fit: BoxFit.fill,
+        )));
       // leading: new CircleAvatar(child: new Text(artist.name[0])));
 }
 
@@ -34,11 +62,12 @@ class LineupScreen extends StatefulWidget {
 
 class _LineupState extends State<LineupScreen> {
   int _currentIndex = 0;
-  String _title = "Schedule";
+  String _title = "SCHEDULE";
   
   String _currentArtistSelected = "";
 
   List _currentList = List();
+  bool _isSearching = false;
   
   Map<String, List<Artist>> _alphabeticalArtists = SplayTreeMap<String, List<Artist>>();
   Map<DateTime, List<Artist>> _scheduleArtists = SplayTreeMap<DateTime, List<Artist>>();
@@ -58,7 +87,6 @@ class _LineupState extends State<LineupScreen> {
       });
     });
 
-    
     
     _alphabeticalArtists.forEach( (k,v) {
       v.sort((a,b) {
@@ -113,8 +141,9 @@ class _LineupState extends State<LineupScreen> {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(vertical: 8.0),
         itemBuilder: (context, index){
-          return StickyHeader(
-            header: Container(
+          return Column(
+            children: <Widget>[
+              Container(
               height: 20,
               color: Color(0xffF7F7F7), //pick a lighter gray to match bottom bar
               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -123,7 +152,8 @@ class _LineupState extends State<LineupScreen> {
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
-            content: Container(
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               color: Colors.white,
               // child: _ArtistListItem(artistsList[index]),
               child: ListView.builder(
@@ -137,7 +167,7 @@ class _LineupState extends State<LineupScreen> {
                     child: Column(
                     children: <Widget> [
                       GestureDetector(
-                        child: _ArtistListItem(_alphabeticalArtists[_alphabeticalArtists.keys.elementAt(index)][index2]),
+                        child: _ArtistListItem(_alphabeticalArtists[_alphabeticalArtists.keys.elementAt(index)][index2], false),
                         onTap: () {
                         Navigator.push(
                           context,
@@ -161,6 +191,8 @@ class _LineupState extends State<LineupScreen> {
                 },
               ), 
             )
+            ],
+            
           );
         },
         itemCount: _alphabeticalArtists.keys.length,
@@ -199,7 +231,7 @@ class _LineupState extends State<LineupScreen> {
                     child: Column(
                     children: <Widget> [
                       GestureDetector(
-                        child: _ArtistListItem(_scheduleArtists[_scheduleArtists.keys.elementAt(index)][index2]),
+                        child: _ArtistListItem(_scheduleArtists[_scheduleArtists.keys.elementAt(index)][index2], true),
                         onTap: () {
                         Navigator.push(
                           context,
@@ -233,7 +265,7 @@ class _LineupState extends State<LineupScreen> {
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
-      _title = index == 0 ? "Schedule" : "Lineup";
+      _title = index == 0 ? "SCHEDULE" : "LINEUP";
     });
   }
 
@@ -264,7 +296,7 @@ class _LineupState extends State<LineupScreen> {
       body:  Column(
           children: <Widget>[
             //TODO: search bar might not be needed as the plan is to have alphabetical scrolling!
-            searchBar(null),
+            // searchBar(null),
             Expanded(
               child: _currentIndex == 0 ? schedule() : lineup(),
             )

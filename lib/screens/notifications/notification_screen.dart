@@ -20,6 +20,17 @@ class _AnnouncementState extends State<AnnouncementScreen> {
       _currentlySelected = selected;
     });
   }
+
+  String parseDateTime(DateTime dateTime) {
+    String result = "";
+    result += dateTime.month.toString()+ "/" + dateTime.day.toString()+ "/" + (dateTime.year % 100).toString() + " - ";
+    result += dateTime.hour % 12 == 0 ? "12": dateTime.hour.toString();
+    result += ":";
+    result += dateTime.minute == 0 ? "00" : dateTime.minute.toString();
+    result += dateTime.hour < 12 ? " AM" : " PM" ;
+
+    return result;
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -64,7 +75,7 @@ class _AnnouncementState extends State<AnnouncementScreen> {
                 Container(
                   padding: EdgeInsets.fromLTRB(25,5,20,5),
                   alignment: Alignment.centerLeft,
-                  child: Text(notifications[index].timeSent.toString(),
+                  child: Text(parseDateTime(notifications[index].timeSent),
                   textAlign: TextAlign.left,
                    style: TextStyle(
                      color: Colors.black.withOpacity(0.6)
