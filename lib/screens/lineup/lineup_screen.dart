@@ -20,7 +20,7 @@ class _ArtistListItem extends ListTile {
     : super(
       //Push specific artist screen
       // onTap: () => Navigator.of(context).push(main),
-      title: new Text(artist.name.toUpperCase()),
+      title: Text(artist.name.toUpperCase()), //TODO on schedule screen put location under artist name
       leading: CircleAvatar(child: Image.asset('assets/images/gorilla_face_graphic.png')));
       // leading: new CircleAvatar(child: new Text(artist.name[0])));
 }
@@ -50,10 +50,12 @@ class _LineupState extends State<LineupScreen> {
       }
       _alphabeticalArtists[artist.name[0]].add(artist);
 
-      if (!_scheduleArtists.containsKey(artist.performanceTime)) {
-        _scheduleArtists[artist.performanceTime] = [];
-      }
-      _scheduleArtists[artist.performanceTime].add(artist);
+      artist.performanceTimes.forEach((time) {
+        if (!_scheduleArtists.containsKey(time)) {
+          _scheduleArtists[time] = [];
+        }
+        _scheduleArtists[time].add(artist);
+      });
     });
 
     
@@ -114,18 +116,17 @@ class _LineupState extends State<LineupScreen> {
           return StickyHeader(
             header: Container(
               height: 20,
-              color: Colors.grey, //pick a lighter gray to match bottom bar
+              color: Color(0xffF7F7F7), //pick a lighter gray to match bottom bar
               padding: EdgeInsets.symmetric(horizontal: 16),
               alignment: Alignment.centerLeft,
               child: Text(_alphabeticalArtists.keys.elementAt(index),
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.grey),
               ),
             ),
             content: Container(
               color: Colors.white,
               // child: _ArtistListItem(artistsList[index]),
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: _alphabeticalArtists[_alphabeticalArtists.keys.elementAt(index)].length,
                 itemBuilder: (context, index2) {
@@ -176,18 +177,18 @@ class _LineupState extends State<LineupScreen> {
           return StickyHeader(
             header: Container(
               height: 20,
-              color: Colors.grey, //pick a lighter gray to match bottom bar
+              color: Color(0xffF7F7F7), //pick a lighter gray to match bottom bar
               padding: EdgeInsets.symmetric(horizontal: 16),
               alignment: Alignment.centerLeft,
               child: Text(formatText(_scheduleArtists.keys.elementAt(index)),
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.grey),
               ),
             ),
             content: Container(
               color: Colors.white,
               // child: _ArtistListItem(artistsList[index]),
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: ClampingScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: _scheduleArtists[_scheduleArtists.keys.elementAt(index)].length,
                 itemBuilder: (context, index2) {
@@ -244,7 +245,8 @@ class _LineupState extends State<LineupScreen> {
         centerTitle: true,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey, //pick a lighter gray
+        backgroundColor: Color(0xffF7F7F7), //pick a lighter gray
+        selectedItemColor: BFEColors.NAVY,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: [
