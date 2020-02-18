@@ -1,3 +1,4 @@
+import 'package:bigfoot_electro/theme/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +18,21 @@ class DrawerOption extends StatelessWidget {
         Navigator.of(context).pushNamed(navigateTo);
       },
     child: Card(
-      child: ListTile(
-        title: Center(
-          child: Text(title),
-        )
+        shape: Border.all(
+          color: BFEColors.MAROON
+        ),
+        color: Colors.transparent,
+        child: ListTile(
+          title: Center(
+            child: Text(title,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white
+              ),
+            ),
+          )
+        ),
       ),
-    ),
   ); 
   }
 }
