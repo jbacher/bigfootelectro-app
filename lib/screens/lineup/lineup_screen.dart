@@ -200,13 +200,72 @@ class _LineupState extends State<LineupScreen> {
       );
   }
 
+  String _parseDayOfWeek(DateTime performanceTime) {
+    switch (performanceTime.weekday) {
+      case 1: return "Monday";
+      case 2: return "Tuesday";
+      case 3: return "Wednesday";
+      case 4: return "Thursday";
+      case 5: return "Friday";
+      case 6: return "Saturday";
+      case 7: return "Sunday";
+      default: return "";
+    }
+  }
+
+  String _parseMonth(DateTime performanceTime) {
+    switch (performanceTime.month) {
+      case 1: return "January"; 
+      case 2: return "February";
+      case 3: return "March";
+      case 4: return "April";
+      case 5: return "May";
+      case 6: return "June";
+      case 7: return "July";
+      case 8: return "August";
+      case 9: return "September";
+      case 10: return "October";
+      case 11: return "November";
+      case 12: return "December";
+      default: return "";
+    }
+  }
+
   Widget schedule() {
+
+    List<int> dateCovered = List<int>();
+
+    Widget _possibleDate(DateTime dateTime) {
+    if (!dateCovered.contains(dateTime.day)) {
+      dateCovered.add(dateTime.day);
+      return SizedBox(
+        width: double.infinity,
+        child: 
+        Container(
+        color: Color(0xffF7F7F7),
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(_parseDayOfWeek(dateTime).toString() +", "+_parseMonth(dateTime)+" "+dateTime.day.toString(),
+          style: TextStyle(
+            fontSize: 40
+          ),
+        ),
+      ),
+      ); 
+    } else {
+      return Container();
+    }
+  }
+
+
     return Scrollbar(
         child: ListView.builder(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(vertical: 8.0),
         itemBuilder: (context, index){
-          return StickyHeader(
+          return
+            Column(children: <Widget>[
+              _possibleDate(_scheduleArtists.keys.elementAt(index)),
+              StickyHeader(
             header: Container(
               height: 20,
               color: Color(0xffF7F7F7), //pick a lighter gray to match bottom bar
@@ -255,7 +314,10 @@ class _LineupState extends State<LineupScreen> {
                 },
               ), 
             )
-          );
+          )
+            ],
+            ); 
+            
         },
         itemCount: _scheduleArtists.keys.length,
         ),
